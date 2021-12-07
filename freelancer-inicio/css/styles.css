@@ -1,0 +1,321 @@
+:root{ /*Para almacenar cualquier variable que queramos reutilizar*/
+    --blanco:#FFFFFF;
+    --oscuro:#212121;
+    --primario:#FFC107;
+    --secundario:#0097A7;
+    --gris: #757575;
+    --grisClaro: #DFE9F3;
+}
+
+/* GLOBALES*/
+
+html{
+    font-size: 62.5%; /*tanto los selectores html y body hacen que podamos normalizar los rem a 1rem = 10px*/
+    box-sizing: border-box;
+    scroll-snap-type: y mandatory;
+}
+
+/* el asterico significa:  selecciona todos los elementos del html (selector universal)*/
+/* before y after son pseudoelementos que no forman parte del html*/
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+
+body{
+    font-size: 16px; /*1rem = 10px*/
+    font-family: 'Krub', sans-serif;
+    /*para el color de fondo con degradado*/
+    background-image: linear-gradient(to top, var(--grisClaro) 0%, var(--blanco) 100%);
+}
+
+.contenedor{
+    max-width: 120rem; /*toma 1200 pixeles como máximo si solamente hay ese espacio disponible, si no toma el 100%*/
+    /*margin-top:0;
+    margin-right: auto;
+    margin-bottom:0;
+    margin-left: auto;*/ /*es lo mismo que la linea de abajo*/
+
+    /*si solo se pone margin, los valores se asignan en sentido de las manecillas del reloj*/
+    /*Toma primero los valores top y bottom para despues tomar right y left*/
+    margin: 0 auto;
+}
+
+.boton{
+    background-color: var(--secundario);
+    color: var(--blanco);
+    padding: 1rem 3rem;
+    margin-top: 3rem; /*para la separacion con otros elementos cerca del boton*/
+    font-size: 2rem;
+    text-decoration: none; /*para quitar todas las decoraciones del texto*/
+    text-transform: uppercase; /*para pasar todo el texto del boton a mayusculas*/
+    font-weight: bold; /*para hacer gruesa la letra*/
+    border-radius: .5rem; /*para los bordes redondeados*/
+    width: 90%;
+    text-align: center;
+    border: none;
+}
+
+@media (min-width: 768px) { 
+    .boton{
+        width: auto; /*se reinicia cuando el tamaño de la pantalla es de más de 768px*/
+    }
+ }
+
+ .boton:hover {
+     cursor: pointer;
+ }
+
+.sombra{
+    /*se puede checar en "Can i use" si se pueden usar ciertas propiedades de CSS como estas en ciertos navegadores*/
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(133,130,133,0.51);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(133,130,133,0.51);
+    box-shadow: 0px 5px 15px 0px rgba(133,130,133,0.51);
+    background-color: var(--blanco);
+    /*paddign para que "Mis servicios" no quede pegadoa la parte superior del contenedor*/
+    padding: 2rem;
+    /*para los bordes redondeados de la sombra*/
+    border-radius: 1rem;
+}
+
+/*TIPOGRAFÍA*/
+
+h1{
+    font-size: 3.8rem;
+}
+
+h2{
+    font-size: 2.8rem;
+}
+
+h3{
+    font-size: 1.8rem;
+}
+
+h1,h2,h3{
+    text-align: center;
+}
+
+/* TÍTULOS */
+
+.titulo span{ /*busca al padre y luego aplica los cambios al hijo*/
+    font-size: 2rem;
+}
+
+/*Utilidades*/
+
+.w-sm-100 {
+    width: 100%;
+}
+
+@media (min-width: 768px) { 
+    .w-sm-100 {
+        width: auto;
+    }
+ }
+
+
+.flex {
+    display: flex;
+}
+
+.alinear-derecha{
+    justify-content: end;
+}
+
+
+/* NAVEGACION PRINCIPAL */
+
+.nav-bg{
+    background-color: var(--secundario);
+}
+
+.navegacion-principal{
+     /*Es lo mismo que 1rem 1rem 1rem 1rem*/
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) { /*tablet*/
+    .navegacion-principal {
+        flex-direction: row;
+        justify-content:space-between;/*distribuye los elementos uniformemente*/
+    }
+ }
+
+.navegacion-principal a{
+    display: block;
+    text-align: center;
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem; /*se cambió el padding para que el color de los enlaces rellenara la barra completamente*/
+}
+
+.navegacion-principal a:hover{ /*pseudoclase, se crea al momento de poner el cursos sobre el enlace*/
+    background-color: var(--primario);
+    color: var(--oscuro);
+}
+
+/*con el codigo agregado en el selector html se solucionó el problema del Box Model */
+
+.hero {
+    background-image: url(../img/hero.jpg); /*imagen de fondo*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 450px;
+    position: relative;
+    /*se agregó para se separar la imagen del contenedor de "Mis servicios"*/
+    margin-bottom: 2rem;
+}
+
+.contenido-hero {
+    position: absolute;
+    /*con el cuarto valor de rgb() se define el nivel de transparencia*/
+    background-color: rgb( 0,0,0, 0.6); /**sintaxis anterior**/
+    background-color: rgb( 0 0 0 / 70%);
+    width: 100%;
+    height: 100%;
+
+    /*cuando se quiera alinear vertical y horizontalmente, este código es muy útil*/
+    display: flex;
+    flex-direction: column; /*para poner el contenido en una columna*/
+    align-items: center;  /*para alinear los elemento en el centro (horizontalmente)*/
+    justify-content: center;  /*para alinear los elementos en el centro (verticalmente)*/
+}
+
+.contenido-hero h2,
+.contenido-hero p {
+    color: var(--blanco);
+}
+
+.contenido-hero .ubicacion{
+    display: flex;
+    align-items: flex-end; /* alinea verticalmente*/
+}
+
+/**Servicios**/
+
+/**scroll snap**/
+.servicios,
+.navegacion-principal,
+.formulario {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
+
+@media (min-width: 768px) { 
+    .servicios {
+        display: grid;
+        /*se divide un entero en tres tercios*/
+        grid-template-columns: 1fr 1fr 1fr;
+        /*grid-templeate-columns: repeat(3,1fr); es lo mismo que la instrucción anterior*/
+        /*version corta*/
+        /*grid: 200px 800px / 300px 300px;*/
+        /*column-gap sirve para agregar separación entre columnas de un grid*/
+        column-gap: 1rem;
+    }    
+}
+
+.servicio { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.servicio h3 {
+    color: var(--secundario);
+    font-weight: bold;
+}
+
+.servicio p {
+    /*interlineado en los parrafos*/
+    line-height: 2;
+    text-align: center;
+}
+
+.servicio .iconos {
+    height: 15rem;
+    width:  15rem;
+    background-color: var(--primario);
+    border-radius: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.formulario {
+    background-color: var(--gris);
+    width: min(60rem, 100%); /**Utilizar el valor más pequeño para asignar el ancho**/
+    /*para centrar horizontalmente, para elementos de tipo block y cuyo padre no es un display flex*/
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.formulario fieldset {
+    border: none;
+}
+
+.formulario legend {
+    text-align: center;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--primario);
+}
+
+@media (min-width: 768px) { 
+    .contenedor-campos {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto auto 20rem;
+        column-gap: 1rem;
+    }
+
+    /*si se tienen tres clases hijas que se llaman igual nth-child selecciona el numero de clase que le pases*/
+    .campo:nth-child(3),
+    .campo:nth-child(4) {
+        grid-column: 1 / 3;
+    }
+}
+
+.campo {
+    margin-bottom: 1rem;
+}
+
+.campo label {
+    color: var(--blanco);
+    font-weight: bold;
+    margin-bottom: .5rem;
+    display: block;
+}
+/**ejemplo de selector de atributo
+.campo input[type="text"] {
+    background-color: red;
+}
+**/
+
+.campo textarea {
+    height: 20rem;
+}
+
+.input-text {
+    width: 100%;
+    border: none;
+    padding: 1.5rem;
+    border-radius: .5rem;
+}
+
+/*
+.enviar .boton {
+    width: 100%;
+}
+*/
+
+.footer {
+    text-align: center;
+}
+
+
